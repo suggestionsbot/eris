@@ -2214,14 +2214,13 @@ declare namespace Eris {
     editNote(note: string): Promise<void>;
     getDMChannel(): Promise<PrivateChannel>;
     getProfile(): Promise<UserProfile>;
-
     removeRelationship(): Promise<void>;
   }
 
   export class VoiceChannel extends GuildChannel implements Invitable {
-    bitrate?: number;
+    bitrate: number;
     type: 2;
-    userLimit?: number;
+    userLimit: number;
     voiceMembers: Collection<Member>;
     createInvite(options?: CreateInviteOptions, reason?: string): Promise<Invite<"withMetadata", VoiceChannel>>;
     getInvites(): Promise<(Invite<"withMetadata", VoiceChannel>)[]>;
@@ -2273,7 +2272,7 @@ declare namespace Eris {
   }
 
   export class VoiceState extends Base {
-    channelID?: string;
+    channelID: string | null;
     createdAt: number;
     deaf: boolean;
     id: string;
@@ -2281,9 +2280,8 @@ declare namespace Eris {
     selfDeaf: boolean;
     selfMute: boolean;
     selfStream: boolean;
-    sessionID?: string;
+    sessionID: string | null;
     suppress: boolean;
-
     constructor(data: BaseData);
   }
 }
