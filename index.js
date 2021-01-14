@@ -35,15 +35,12 @@ Eris.RequestHandler = require("./lib/rest/RequestHandler");
 Eris.Role = require("./lib/structures/Role");
 Eris.SequentialBucket = require("./lib/util/SequentialBucket");
 Eris.Shard = require("./lib/gateway/Shard");
-Eris.SharedStream = require("./lib/voice/SharedStream");
 Eris.StoreChannel = require("./lib/structures/StoreChannel");
 Eris.TextChannel = require("./lib/structures/TextChannel");
 Eris.UnavailableGuild = require("./lib/structures/UnavailableGuild");
 Eris.User = require("./lib/structures/User");
 Eris.VERSION = require("./package.json").version;
 Eris.VoiceChannel = require("./lib/structures/VoiceChannel");
-Eris.VoiceConnection = require("./lib/voice/VoiceConnection");
-Eris.VoiceConnectionManager = require("./lib/voice/VoiceConnectionManager");
 Eris.VoiceState = require("./lib/structures/VoiceState");
 
 module.exports = Eris;

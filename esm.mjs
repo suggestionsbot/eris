@@ -34,14 +34,11 @@ export const {
   Role,
   SequentialBucket,
   Shard,
-  SharedStream,
   StoreChannel,
   TextChannel,
   UnavailableGuild,
   User,
   VERSION,
   VoiceChannel,
-  VoiceConnection,
-  VoiceConnectionManager,
   VoiceState
 } = Eris;
