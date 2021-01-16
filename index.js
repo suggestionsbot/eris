@@ -30,7 +30,6 @@ Eris.NewsChannel = require("./lib/structures/NewsChannel");
 Eris.Permission = require("./lib/structures/Permission");
 Eris.PermissionOverwrite = require("./lib/structures/PermissionOverwrite");
 Eris.PrivateChannel = require("./lib/structures/PrivateChannel");
-Eris.Relationship = require("./lib/structures/Relationship");
 Eris.RequestHandler = require("./lib/rest/RequestHandler");
 Eris.Role = require("./lib/structures/Role");
 Eris.SequentialBucket = require("./lib/util/SequentialBucket");
@@ -40,7 +39,5 @@ Eris.TextChannel = require("./lib/structures/TextChannel");
 Eris.UnavailableGuild = require("./lib/structures/UnavailableGuild");
 Eris.User = require("./lib/structures/User");
 Eris.VERSION = require("./package.json").version;
-Eris.VoiceChannel = require("./lib/structures/VoiceChannel");
-Eris.VoiceState = require("./lib/structures/VoiceState");
 
 module.exports = Eris;

@@ -29,7 +29,6 @@ export const {
   Permission,
   PermissionOverwrite,
   PrivateChannel,
-  Relationship,
   RequestHandler,
   Role,
   SequentialBucket,
@@ -39,6 +38,4 @@ export const {
   UnavailableGuild,
   User,
   VERSION,
-  VoiceChannel,
-  VoiceState
 } = Eris;
