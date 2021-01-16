@@ -7,7 +7,6 @@ export default function(token, options) {
 export const {
   Base,
   Bucket,
-  Call,
   CategoryChannel,
   Channel,
   Client,
