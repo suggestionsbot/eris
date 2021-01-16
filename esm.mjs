@@ -16,7 +16,6 @@ export const {
   DiscordHTTPError,
   DiscordRESTError,
   ExtendedUser,
-  GroupChannel,
   Guild,
   GuildChannel,
   GuildIntegration,

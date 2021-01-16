@@ -319,11 +319,6 @@ declare namespace Eris {
     roleMentions: string[];
     tts: boolean;
   }
-  interface OldGroupChannel {
-    name: string;
-    ownerID: string;
-    icon: string;
-  }
   interface OldRole {
     color: number;
     hoist: boolean;
@@ -335,18 +330,12 @@ declare namespace Eris {
   }
   interface EventListeners<T> {
     (event: "ready" | "disconnect", listener: () => void): T;
-    (event: "callCreate" | "callRing" | "callDelete", listener: (call: Call) => void): T;
-    (event: "callUpdate", listener: (call: Call, oldCall: OldCall) => void): T;
     (event: "channelCreate" | "channelDelete", listener: (channel: AnyChannel) => void): T;
     (
       event: "channelPinUpdate",
       listener: (channel: TextableChannel, timestamp: number, oldTimestamp: number) => void
     ): T;
-    (
-      event: "channelRecipientAdd" | "channelRecipientRemove",
-      listener: (channel: GroupChannel, user: User) => void
-    ): T;
-    (event: "channelUpdate", listener: (channel: AnyChannel, oldChannel: OldGuildChannel | OldGroupChannel) => void): T;
+    (event: "channelUpdate", listener: (channel: AnyChannel, oldChannel: OldGuildChannel) => void): T;
     (event: "connect" | "shardPreReady", listener: (id: number) => void): T;
     (event: "friendSuggestionCreate", listener: (user: User, reasons: FriendSuggestionReasons) => void): T;
     (event: "friendSuggestionDelete", listener: (user: User) => void): T;
@@ -1048,18 +1037,6 @@ declare namespace Eris {
     queue(func: () => void, priority?: boolean): void;
   }
 
-  export class Call extends Base {
-    channel: GroupChannel;
-    createdAt: number;
-    endedTimestamp: number | null;
-    id: string;
-    participants: string[];
-    region: string | null;
-    ringing: string[];
-    unavailable: boolean;
-    constructor(data: BaseData, channel: GroupChannel);
-  }
-
   export class CategoryChannel extends GuildChannel {
     channels: Collection<Exclude<AnyGuildChannel, CategoryChannel>>;
     type: 4;
@@ -1080,7 +1057,6 @@ declare namespace Eris {
     bot?: boolean;
     channelGuildMap: { [s: string]: string };
     gatewayURL?: string;
-    groupChannels: Collection<GroupChannel>;
     guilds: Collection<Guild>;
     guildShardMap: { [s: string]: number };
     notes: { [s: string]: string };
@@ -1141,7 +1117,6 @@ declare namespace Eris {
       options: { name: string; avatar?: string | null },
       reason?: string
     ): Promise<Webhook>;
-    createGroupChannel(userIDs: string[]): Promise<GroupChannel>;
     createGuild(name: string, options?: CreateGuildOptions): Promise<Guild>;
     createGuildEmoji(guildID: string, options: EmojiOptions, reason?: string): Promise<Emoji>;
     createGuildFromTemplate(code: string, name: string, icon?: string): Promise<Guild>;
@@ -1171,7 +1146,7 @@ declare namespace Eris {
       channelID: string,
       options: EditChannelOptions,
       reason?: string
-    ): Promise<GroupChannel | AnyGuildChannel>;
+    ): Promise<AnyGuildChannel>;
     editChannelPermission(
       channelID: string,
       overwriteID: string,
@@ -1379,19 +1354,6 @@ declare namespace Eris {
     mfaEnabled: boolean;
     premiumType: 0 | 1 | 2;
     verified: boolean;
-  }
-
-  export class GroupChannel extends PrivateChannel {
-    icon: string | null;
-    iconURL: string | null;
-    name: string;
-    ownerID: string;
-    recipients: Collection<User>;
-    type: 3;
-    addRecipient(userID: string): Promise<void>;
-    dynamicIconURL(format?: ImageFormat, size?: number): string;
-    edit(options: { icon?: string; name?: string; ownerID?: string }): Promise<GroupChannel>;
-    removeRecipient(userID: string): Promise<void>;
   }
 
   interface DiscoveryMetadata {
@@ -1652,7 +1614,7 @@ declare namespace Eris {
     createdAt: CT extends "withMetadata" ? number : null;
     guild: CT extends "withMetadata"
       ? Guild // Invite with Metadata always has guild prop
-      : CH extends Extract<InviteChannel, GroupChannel> // Invite without Metadata
+      : CH extends InviteChannel // Invite without Metadata
         ? never // If the channel is GroupChannel, there is no guild
         : CH extends Exclude<InviteChannel, InvitePartialChannel> // Invite without Metadata and not GroupChanel
           ? Guild // If the invite channel is not partial
