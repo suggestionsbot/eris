@@ -1048,27 +1048,6 @@ declare namespace Eris {
     queue(func: () => void, priority?: boolean): void;
   }
 
-  export class BrowserWebSocket extends EventEmitter {
-    static CONNECTING: 0;
-    static OPEN: 1;
-    static CLOSING: 2;
-    static CLOSED: 3;
-    readyState: number;
-    constructor(url: string);
-    close(code?: number, reason?: string): void;
-    removeEventListener(event: string | symbol, listener: (...args: any[]) => void): this;
-    // @ts-ignore: DOM
-    send(data: string | ArrayBufferLike | Blob | ArrayBufferView): void;
-    terminate(): void;
-  }
-
-  export class BrowserWebSocketError extends Error {
-    // @ts-ignore: DOM
-    event: Event;
-    // @ts-ignore: DOM
-    constructor(message: string, event: Event);
-  }
-
   export class Call extends Base {
     channel: GroupChannel;
     createdAt: number;
