@@ -1314,7 +1314,8 @@ declare namespace Eris {
     edit(content: MessageContent): Promise<Message<T>>;
     getReaction(reaction: string, limit?: number, before?: string, after?: string): Promise<User[]>;
     pin(): Promise<void>;
-    removeReaction(reaction: string): Promise<void>;
+    removeReaction(reaction: string): Promise<void>
+    removeReaction(reaction: string, userID: string): Promise<void>;
     removeReactionEmoji(reaction: string): Promise<void>;
     removeReactions(): Promise<void>;
     unpin(): Promise<void>;
